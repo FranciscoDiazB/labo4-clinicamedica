@@ -1,1 +1,49 @@
-<p>login works!</p>
+<div class="background">
+
+    
+</div>
+
+    <div class="message hide-shortcuts" [ngClass]="{'error': alertNumber === 1, 'success': alertNumber === 2}" id="alert-message" style="justify-content: center; align-items: center;" >
+        <!--<button style="background-color: transparent; border: transparent;">
+            <i class="fa-regular fa-circle-xmark" style="font-size: 2.5vw; position: absolute; top: 5%; right: 5%;" (click)="toggleAlertMessage(true)"></i>
+        </button> -->
+        <i *ngIf="alertNumber == 1" class="fa-regular fa-circle-xmark" style="font-size: 3vw; position: absolute; top: 5%; right: 45%; color: whitesmoke;"></i>
+        <i *ngIf="alertNumber == 2" class="fa-regular fa-circle-check" style="font-size: 3vw; position: absolute; top: 5%; right: 45%; color: whitesmoke;"></i>
+        <br><br><br>
+        <h2>{{alertTitle}}</h2>
+        <hr class="rounded">
+        <p class="text-alert">{{alertMessage}}</p>
+
+    </div>
+
+<div class="container-login">
+
+    <button class="logo hover-logo" (click)="toggleShortcuts()"></button>
+   
+
+    <div style="justify-items: center; align-items: center;">
+        <h1>Ingresar al Sistema</h1>
+    </div>
+
+    <div class="form-login">
+
+        <input class="input-text" type="text" placeholder="Correo Electrónico" [(ngModel)]="email">
+
+        <div class="password-container">
+            <input [type]="showPassword ? 'text' : 'password'" placeholder="Contraseña" [(ngModel)]="password"/>
+            <button type="button" class="toggle-btn" (click)="togglePassword()">
+                  <i class="fa" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+            </button>
+        </div>
+    </div>
+    <br>
+
+    <div class="container-shortcuts hide-shortcuts" id="shortcuts">
+
+
+    </div>
+
+    <button class="register-link text-hover">¿No tiene cuenta? Registrese...</button>
+    <br><br>
+    <button class="button-login button-hover" (click)="loginUser()">Ingresar</button>
+</div>

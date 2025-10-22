@@ -1,0 +1,23 @@
+.fab-container {
+    position: fixed;
+    top: 2%;
+    right: 1%;
+    z-index: 100;
+  }
+  
+  .fab {
+    background: rgba(36, 159, 181, 0.48);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: background 0.3s ease;
+  
+    &:hover {
+      background: #0056b3;
+    }
+  }

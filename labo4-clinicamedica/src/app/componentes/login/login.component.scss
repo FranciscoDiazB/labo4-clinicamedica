@@ -1,0 +1,272 @@
+@keyframes heartbeat {
+    from {
+              transform: scale(1);
+              transform-origin: center center;
+              animation-timing-function: ease-out;
+    }
+    10% {
+              transform: scale(0.91);
+              animation-timing-function: ease-in;
+    }
+    17% {
+              transform: scale(0.98);
+              animation-timing-function: ease-out;
+    }
+    33% {
+              transform: scale(0.87);
+              animation-timing-function: ease-in;
+    }
+    45% {
+              transform: scale(1);
+              animation-timing-function: ease-out;
+    }
+  }
+  
+  @keyframes slide-in-blurred-right {
+    0% {
+      -webkit-transform: translateX(1000px) scaleX(2.5) scaleY(0.2);
+              transform: translateX(1000px) scaleX(2.5) scaleY(0.2);
+      -webkit-transform-origin: 0% 50%;
+              transform-origin: 0% 50%;
+      -webkit-filter: blur(40px);
+              filter: blur(40px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0) scaleY(1) scaleX(1);
+              transform: translateX(0) scaleY(1) scaleX(1);
+      -webkit-transform-origin: 50% 50%;
+              transform-origin: 50% 50%;
+      -webkit-filter: blur(0);
+              filter: blur(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes kenburns-bottom-left {
+    0% {
+      -webkit-transform: scale(1) translate(0, 0);
+              transform: scale(1) translate(0, 0);
+      -webkit-transform-origin: 16% 84%;
+              transform-origin: 16% 84%;
+    }
+    100% {
+      -webkit-transform: scale(1.25) translate(-20px, 15px);
+              transform: scale(1.25) translate(-20px, 15px);
+      -webkit-transform-origin: left bottom;
+              transform-origin: left bottom;
+    }
+  }
+  
+
+
+.background{
+    background-image: url("../../assets/blur-hospital_1203-7974.jpg");
+    position: fixed;
+    top: 0%;
+    right: 0%;
+    z-index: 0;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    animation: kenburns-bottom-left 5s ease-out both;
+}
+
+.logo{
+    background-image: url("../../assets/logos/clinicaMedicaLogoAzulTres.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+    background-color: transparent;
+    border: transparent;
+    margin-top: 50px;
+    transition: 0.4s ease-in-out;
+    animation: heartbeat 1.5s infinite;
+}
+
+.container-login{
+    position: absolute;
+    width: 60%;
+    top: 0;
+    right: 0;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.36);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(33.7px);
+    -webkit-backdrop-filter: blur(11.7px);
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    animation: slide-in-blurred-right 1.5s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+}
+
+.title-CMS{
+    position: absolute;
+    width: 40%;
+    top: 0;
+    left: 0;
+}
+
+.form-login{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-text{
+    padding: 20px;
+    height: 70px;
+    width: 50%;
+    font-family: 'medicalFont';
+    border-radius: 10px;
+    font-size: 1.3vw;
+    background-color: lightyellow;
+}
+
+.button-login{
+    padding: 20px;
+    width: 50%;
+    font-family: 'medicalFont';
+    border-radius: 10px;
+    color: lightyellow;
+    font-size: 2vw;
+    background-color: #249fb57a;
+    transition: 1s ease-in-out;
+    border: solid 1px black;
+}
+
+.text-hover:hover{
+    transform: scale(1.2);
+    color: lightyellow;
+}
+
+.button-hover:hover{
+    background-color: rgba(0, 0, 0, 0.36);
+    border: solid 1px lightyellow;
+}
+
+.register-link{
+    padding: 20px;
+    width: auto;
+    font-family: 'medicalFont';
+    border: transparent;
+    background-color: transparent;
+    color: rgba(0, 0, 0);
+    transition: 1s ease-in-out;
+    font-size: 1.8vw;
+    font-family: 'medicalFont';
+}
+
+.password-container {
+    position: relative;
+    width: 50%;
+    font-family: 'medicalFont';
+    border-radius: 10px;
+
+    background-color: lightyellow;
+  }
+  
+  .password-container input {
+    width: 100%;
+    height: 70px;
+    padding: 20px 40px 20px 20px; /* espacio para el botón */
+    font-size: 1.3vw;
+    background-color: lightyellow;
+    border-radius: 10px;
+  }
+  
+  .password-container .toggle-btn {
+    position: absolute;
+    right: 3%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #555;
+    font-size: 1.5vw;
+  }
+  
+  .password-container .toggle-btn:hover {
+    color: #000;
+  }
+
+h1{
+    margin-top: 20px;
+    font-family: 'medicalFont';
+    font-size: 4vw;
+    text-shadow: 1px 1px black;
+    color: whitesmoke;
+}
+
+h2{
+    font-family: 'medicalFont';
+    font-size: 2.5vw;
+    text-shadow: 1px 1px black;
+    color: whitesmoke;
+}
+
+.text-alert{
+    font-family: 'medicalFont';
+    font-size: 1.5vw;
+    color: whitesmoke;
+}
+
+.message{
+    position: absolute;
+    width: 30%;
+    height: 35%;
+    border-radius: 35px;
+    left: 35%;
+    top: 32.5%;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(14.5px);
+    -webkit-backdrop-filter: blur(14.5px);
+    padding: 15px;
+    transform: scale(1);
+    transition: transform 0.4s, top 0.4s;
+    z-index: 5000;
+
+    hr.rounded {
+        border-top: 5px solid #ffffff;
+        border-radius: 3px;
+        width: 80%;
+    }
+  }
+
+.container-shortcuts{
+    position: absolute;
+    width: 80%;
+    height: 500px;
+    border-radius: 35px;
+    top: 28.7%;
+    left: 10%;
+    background: rgba(105, 39, 46, 0.603);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(30.5px);
+    -webkit-backdrop-filter: blur(30.5px);
+    padding: 15px;
+    transform: scale(1);
+    transition: transform 0.4s, top 0.4s;
+  }
+
+  .hide-shortcuts{
+    transform: scale(0.0000001);
+    z-index: 5000;
+  }
+
+.error{
+    background: rgba(105, 39, 46, 0.603);
+}
+
+.success{
+    background: rgba(68, 152, 66, 0.603);
+}

@@ -1,12 +1,45 @@
 
 <div class="background">
 
-    <div class="container-introduccion">
+    
+</div>
 
-        <div style="justify-items: center; align-items: center;">
-            <h1>Clínica Médica Serenity C.M.S</h1>
+@if (spinner) {
+
+    <div class="spinner-overlay">
+        <div class="spinner">
+            <button class="spinner-logo" disabled="true"></button>
         </div>
+        <h2>Cargando...</h2>
+    </div>
+}
+
+<div class="container-welcome">
+
+    <button class="logo" disabled="true"></button>
+   
+    <div style="justify-items: center; align-items: center;">
+        <h1>Clínica Médica Serenity <br> C.M.S</h1>
+    </div>
+    <br><br>
+
+    <div class="div-buttons-short">
+
+        <div style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+
+            <div class="div-signUpIn button-hover">
+                <button class="img-signUp" (click)="goTo('register')" ></button>
+            </div>
+            <h2>Registrarse</h2>
+        </div>
+
+        <div style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center; ">
+            <div class="div-signUpIn button-hover">
+                <button class="img-signIn" (click)="goTo('login')"></button>
+            </div>
+            <h2>Ingresar</h2>
+        </div>
+       
     </div>
 
 </div>
-

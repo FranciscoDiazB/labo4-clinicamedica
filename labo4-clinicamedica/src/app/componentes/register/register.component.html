@@ -1,1 +1,69 @@
-<p>register works!</p>
+<div class="background">
+
+    
+</div>
+
+    <div class="message hide-shortcuts" [ngClass]="{'error': alertNumber === 1, 'success': alertNumber === 2}" id="alert-message" style="justify-content: center; align-items: center;" >
+        <!--<button style="background-color: transparent; border: transparent;">
+            <i class="fa-regular fa-circle-xmark" style="font-size: 2.5vw; position: absolute; top: 5%; right: 5%;" (click)="toggleAlertMessage(true)"></i>
+        </button> -->
+        <i *ngIf="alertNumber == 1" class="fa-regular fa-circle-xmark" style="font-size: 30px; position: absolute; right: 10%; color: whitesmoke;"> Error</i>
+        <i *ngIf="alertNumber == 2" class="fa-regular fa-circle-check" style="font-size: 30px; position: absolute; right: 10%; color: whitesmoke;"> Logro</i>
+        <br>
+        <h2>{{alertTitle}}</h2>
+        <hr class="rounded">
+        <p class="text-alert">{{alertMessage}}</p>
+
+    </div>
+
+    @if (spinner) {
+
+        <div class="spinner-overlay">
+            <div class="spinner">
+                <button class="spinner-logo" disabled="true"></button>
+            </div>
+            <h2>Cargando...</h2>
+        </div>
+    }
+
+<div class="container-register">
+
+    <div style="display: flex; justify-content: center; align-items: center; align-content: center; gap: 30px;">
+
+        <button class="logo hover-logo" disabled="true"></button>
+        <h1>Registrarse</h1>
+
+    </div>
+
+   
+
+    <div style="justify-items: center; align-items: center;">
+    </div>
+
+    <div class="form-pacient">
+
+        <div style="display: flex; gap: 2%; width: 100%; justify-content: center;">
+            <input class="input-text" style="width: 34%;" type="text" placeholder="Nombre">
+            <input class="input-text" style="width: 34%;" type="text" placeholder="Apellido">
+
+        </div>
+        <input class="input-text" type="text" placeholder="Correo Electrónico">
+        <input class="input-text" type="text" placeholder="Correo Electrónico">
+
+        <div class="password-container">
+            <input [type]="showPassword ? 'text' : 'password'" placeholder="Contraseña"/>
+            <button type="button" class="toggle-btn" (click)="togglePassword()">
+                  <i class="fa" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+            </button>
+        </div>
+    </div>
+    <br>
+
+    <div class="container-shortcuts hide-shortcuts" id="shortcuts">
+
+
+    </div>
+    <br><br>
+    <button class="button-login button-hover">Ingresar</button>
+</div>
+

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SupabaseService } from '../../services/supabase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +19,9 @@ export class LoginComponent {
   alertNumber:number = 0;
   alertTitle:string = '';
   alertMessage:string = '';
+  spinner:boolean = false;
 
-  constructor(private supabaseService:SupabaseService){
+  constructor(private supabaseService:SupabaseService, private router:Router){
 
   }
 
@@ -55,6 +57,10 @@ export class LoginComponent {
 
   loginUser(){
     try{
+      this.spinner = true;
+
+      let success = false;
+
       this.supabaseService.signIn(this.email, this.password).then(
         async ({ data, error }) => {
           if (error?.message === 'Email not confirmed') {
@@ -90,15 +96,22 @@ export class LoginComponent {
             this.alertTitle = 'Éxito Validando Usuario'
             this.alertMessage = 'Se pudo validar con éxito el usuario en la base de datos. Ingresando...'
             this.toggleAlertMessage(false);
+            success = true;
           }
         }
       );
       setTimeout(() => {
         this.toggleAlertMessage(true);
+        this.spinner = false;
+        if(success){
+          this.router.navigateByUrl('home');
+        }
       }, 2500);
     }
     catch{
       console.log('Excepcion');
+    }
+    finally{
     }
   }
 

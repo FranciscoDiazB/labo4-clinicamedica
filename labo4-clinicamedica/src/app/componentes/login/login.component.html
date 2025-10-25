@@ -7,14 +7,24 @@
         <!--<button style="background-color: transparent; border: transparent;">
             <i class="fa-regular fa-circle-xmark" style="font-size: 2.5vw; position: absolute; top: 5%; right: 5%;" (click)="toggleAlertMessage(true)"></i>
         </button> -->
-        <i *ngIf="alertNumber == 1" class="fa-regular fa-circle-xmark" style="font-size: 3vw; position: absolute; top: 5%; right: 45%; color: whitesmoke;"></i>
-        <i *ngIf="alertNumber == 2" class="fa-regular fa-circle-check" style="font-size: 3vw; position: absolute; top: 5%; right: 45%; color: whitesmoke;"></i>
-        <br><br><br>
+        <i *ngIf="alertNumber == 1" class="fa-regular fa-circle-xmark" style="font-size: 30px; position: absolute; right: 10%; color: whitesmoke;"> Error</i>
+        <i *ngIf="alertNumber == 2" class="fa-regular fa-circle-check" style="font-size: 30px; position: absolute; right: 10%; color: whitesmoke;"> Logro</i>
+        <br>
         <h2>{{alertTitle}}</h2>
         <hr class="rounded">
         <p class="text-alert">{{alertMessage}}</p>
 
     </div>
+
+    @if (spinner) {
+
+        <div class="spinner-overlay">
+            <div class="spinner">
+                <button class="spinner-logo" disabled="true"></button>
+            </div>
+            <h2>Cargando...</h2>
+        </div>
+    }
 
 <div class="container-login">
 

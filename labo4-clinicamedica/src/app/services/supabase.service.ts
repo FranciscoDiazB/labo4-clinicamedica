@@ -23,5 +23,4 @@ export class SupabaseService {
       password: password,
     });
   }
-
 }

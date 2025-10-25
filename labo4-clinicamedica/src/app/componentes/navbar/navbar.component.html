@@ -1,9 +1,6 @@
 <nav class="navbar" [class.open]="isOpen">
     <ul>
-      <li><a routerLink="/home" (click)="close()">Inicio</a></li>
+      <li><a routerLink="/home" (click)="goTo('welcome')">Bienvenida</a></li>
       <hr class="rounded">
-      <li><a routerLink="/login" (click)="close()">Login</a></li>
-      <hr class="rounded">
-      <li><a routerLink="/register" (click)="close()">Registro</a></li>
     </ul>
   </nav>

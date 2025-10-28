@@ -37,6 +37,77 @@
     }
   }
 
+  @keyframes slide-in-top {
+    0% {
+              transform: translateY(-30px);
+      opacity: 0;
+    }
+    100% {
+              transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes swirl-in-fwd {
+    0% {
+              transform: rotate(-540deg) scale(0);
+      opacity: 0;
+    }
+    100% {
+              transform: rotate(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes wobble-hor-bottom {
+    0%,
+    100% {
+              transform: translateX(0%);
+              transform-origin: 50% 50%;
+    }
+    15% {
+              transform: translateX(-30px) rotate(-6deg);
+    }
+    30% {
+              transform: translateX(15px) rotate(6deg);
+    }
+    45% {
+              transform: translateX(-15px) rotate(-3.6deg);
+    }
+    60% {
+              transform: translateX(9px) rotate(2.4deg);
+    }
+    75% {
+              transform: translateX(-6px) rotate(-1.2deg);
+    }
+  }
+  
+
+  @keyframes jello-horizontal {
+    0% {
+              transform: scale3d(1, 1, 1);
+    }
+    30% {
+              transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+              transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+              transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+              transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+              transform: scale3d(1.05, 0.95, 1);
+    }
+    100% {
+              transform: scale3d(1, 1, 1);
+    }
+  }
+  
+
 .background{
     background-image: url("../../assets/blur-hospital_1203-7974.jpg");
     position: fixed;
@@ -64,10 +135,118 @@
     animation: heartbeat 1.5s infinite;
 }
 
+.div-buttons-short{
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  position: absolute;
+  top: 75%;
+  gap: 5%;
+  display: flex;
+}
+
+.div-circle{
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  transition: 1s ease-in-out;
+  animation: 0.8s ease-in-out 0s 1 swirl-in-fwd;
+  background: transparent;
+}
+
+.div-signUpIn{
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.6px);
+  -webkit-backdrop-filter: blur(8.6px);
+  padding: 20px;
+  width: 180px;
+  height: 180px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  transition: 1s ease-in-out;
+  font-family: 'medicalFont';
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.div-reset{
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.6px);
+  -webkit-backdrop-filter: blur(8.6px);
+  padding: 20px;
+  width: 100px;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  transition: 1s ease-in-out;
+  font-family: 'medicalFont';
+  color: #ffffff;
+}
+
+.div-reset:hover{
+  transform: scale(1.2);
+}
+
+.swirl-anim{
+  animation: 0.8s ease-in-out 0s 1 swirl-in-fwd;
+}
+
+.img-forward{
+  background-image: url("../../assets/forms/forwardForm.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: transparent;
+  width: 80px;
+  height: 80px;
+}
+
+.img-signUp{
+  background-image: url("../../assets/welcome/SU2.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: transparent;
+  width: 80px;
+  height: 80px;
+}
+
+.img-camera{
+  background-image: url("../../assets/forms/cameraClinica.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: transparent;
+  width: 80px;
+  height: 80px;
+}
+
+.img-backward{
+  background-image: url("../../assets/forms/backwardForm.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: transparent;
+  width: 80px;
+  height: 80px;
+}
+
 .container-register{
     position: absolute;
     width: 70%;
-    top: 0;
     right: 15%;
     height: 100%;
     background: rgba(0, 0, 0, 0.36);
@@ -76,18 +255,25 @@
     -webkit-backdrop-filter: blur(11.7px);
     justify-content: center;
     text-align: center;
-    padding: 30px;
-    border-radius: 55px;
+    //border-radius: 55px;
     animation: slide-in-blurred-right 1.5s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
 }
 
 .form-pacient{
-    margin-top: 50px;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
     justify-content: center;
     align-items: center;
+}
+
+.form-pacient-2{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
 }
 
 .input-text{
@@ -98,6 +284,7 @@
     border-radius: 10px;
     font-size: 25px;
     background-color: lightyellow;
+    transition: 1.2s ease-in-out;
 }
 
 .button-login{
@@ -112,9 +299,17 @@
     border: solid 1px black;
 }
 
+.previews{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  gap: 30px;
+}
+
 .password-container {
     position: relative;
-    width: 50%;
+    width: 30%;
     font-family: 'medicalFont';
     border-radius: 10px;
 
@@ -161,6 +356,13 @@ h2{
     color: whitesmoke;
 }
 
+h3{
+  font-family: 'medicalFont';
+  font-size: 20px;
+  text-shadow: 1px 1px black;
+  color: whitesmoke;
+}
+
 .text-alert{
     font-family: 'medicalFont';
     font-size: 25px;
@@ -202,6 +404,27 @@ h2{
     background: rgba(68, 152, 66, 0.603);
 }
 
+.error-form{
+  border: 5px solid rgba(187, 36, 51, 0.603);
+}
+
+.success-form{
+ border: 5px solid green;
+}
+
+.error-title{
+  color: rgba(105, 39, 46, 0.603);
+}
+
+.success-title{
+ color: rgba(68, 152, 66, 0.603);
+}
+
+.required{
+  border-right: 10px solid crimson;
+}
+
+
 @keyframes spin{
     to{
         transform: rotate(360deg);
@@ -236,4 +459,183 @@ h2{
     border: transparent;
     transition: 0.4s ease-in-out;
     animation: heartbeat 1.5s infinite;
+}
+
+.selector-insurance{
+  padding: 10px;
+  height: 70px;
+  width: 29.5%;
+  font-family: 'medicalFont';
+  border-radius: 10px;
+  font-size: 25px;
+  background-color: lightyellow;
+  transition: 1.2s ease-in-out;
+}
+
+p{
+  font-size: 25px;
+  color: crimson;
+  animation: 0.8s ease-in-out 0s 1 slide-in-top;
+  font-family: 'medicalFont';
+}
+
+.slide-anim{
+  animation: 0.8s ease-in-out 0s 1 slide-in-top;
+}
+
+label{
+  font-family: 'medicalFont';
+  font-size: 30px;
+  text-shadow: 1px 1px black;
+  color: whitesmoke;
+  width: 11%;
+}
+
+.jello-animation{
+  animation: jello-horizontal 1.2s ease-in-out infinite both;
+}
+
+.file-input-clean {
+  color: transparent;
+}
+
+.file-input-clean::-webkit-file-upload-button {
+  visibility: visible;
+  color: white;
+  background: #007bff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.file-input-clean::file-selector-button {
+  visibility: hidden;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.container-img-preview-large{
+  font-family: 'latoFont';
+  position: absolute;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10%;
+  top: 20%;
+  left: 35%;
+  background: rgba(36, 159, 181, 0.478);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(14.5px);
+  -webkit-backdrop-filter: blur(14.5px);
+  padding: 15px;
+  transform: scale(0.0000001);
+  transition: transform 0.4s, top 0.4s;
+  z-index: -1;
+  z-index: 5000;
+}
+
+.container-img-preview-large::-webkit-scrollbar {
+  display: none;
+}
+
+.open-img-preview-large{
+  transform: scale(1);
+  top: 15.7%;
+  z-index: 5000;
+}
+
+.autocomplete-container {
+  position: relative;
+  width: 38%;
+}
+
+.input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.input {
+  flex: 1;
+  padding: 6px;
+}
+
+.sugerencias {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  z-index: 10;
+  list-style: none;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 0;
+  margin: 4px 0 0;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.sugerencias li {
+  font-family: 'medicalFont';
+  font-size: 25px;
+  padding: 6px;
+  background-color: lightyellow;
+  cursor: pointer;
+}
+
+.sugerencias li:hover {
+  background: #eee;
+}
+
+.button-add{
+  background: transparent;
+  width: 50%;
+  border-radius: 15px;
+  border: 2px solid lightyellow;
+  font-family: 'medicalFont';
+  font-size: 20px;
+  color: white;
+}
+
+
+.div-buttons-choice{
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 10%;
+  display: flex;
+}
+
+.div-choice-register{
+  background: rgba(0, 0, 0, 0);
+  border-radius: 50%;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.6px);
+  -webkit-backdrop-filter: blur(8.6px);
+  padding: 20px;
+  width: 220px;
+  height: 220px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.img-register-both{
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: transparent;
+  color: rgb(36, 159, 181);
+  width: 180px;
+  height: 180px;
+  border: 5px solid rgb(36, 159, 181);
+  border-radius: 50%;
+}
+
+.button-hover:hover{
+  animation: wobble-hor-bottom 1s infinite both;
+
 }

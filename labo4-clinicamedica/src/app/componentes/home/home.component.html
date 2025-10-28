@@ -1,1 +1,56 @@
-<p>home works!</p>
+<div class="background">
+
+
+
+
+</div>
+
+@if (spinner) {
+
+    <div class="spinner-overlay">
+        <div class="spinner">
+            <button class="spinner-logo" disabled="true"></button>
+        </div>
+        <h2>Cargando...</h2>
+    </div>
+}
+
+<div class="container-home">
+   
+    <div style="justify-items: center; align-items: center; display: flex; justify-content: center; gap: 2.5%;">
+        <h1>Clínica Médica Serenity</h1>
+        <button class="logo" disabled="true"></button>
+    </div>
+    <br>
+
+    @if(profileUser === 'Admin' || profileUser === 'Especialista' || profileUser === 'Paciente'){
+        
+        <h2>Pudo ingresar al sistema con éxito. Su perfil es de {{profileUser}}.</h2>
+        <hr style="width: 80%;">
+        <h3>Ingrese a algunas de las secciones que se muestra a continuación o desde el menú de navegación.</h3>
+        <br><br>
+        <div class="div-buttons-choice">
+    
+            @if (profileUser === 'Admin') {
+    
+                <div style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+        
+                    <div class="div-choice-register button-hover">
+                        <button class="img-register-both" (click)="goTo('users')" ><i style="font-size: 60px; background: transparent;" class="fa-solid fa-users"></i></button>
+                    </div>
+                    <h2>Usuarios</h2>
+                </div>
+            }
+        </div>
+    }
+    @else {
+        <h2>Todavía no ingreso sesión para poder acceder a la funcionalidad.</h2>
+        <hr style="width: 80%;">
+        <h3>Inicie sesión para poder utilizar la aplicación.</h3>
+        <h3>Disculpe las Molestias.</h3>
+        <br><br>
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 140px; background: transparent; color: rgb(36, 159, 181);" ></i>
+    }
+
+
+</div>

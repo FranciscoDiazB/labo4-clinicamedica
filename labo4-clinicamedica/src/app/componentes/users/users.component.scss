@@ -1,0 +1,721 @@
+@keyframes fade-in {
+    0% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes puff-in-center {
+    0% {
+      -webkit-transform: scale(2);
+              transform: scale(2);
+      -webkit-filter: blur(4px);
+              filter: blur(4px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+  }
+
+  @keyframes swirl-in-fwd {
+    0% {
+              transform: rotate(-540deg) scale(0);
+      opacity: 0;
+    }
+    100% {
+              transform: rotate(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-in-top {
+    0% {
+              transform: translateY(-30px);
+      opacity: 0;
+    }
+    100% {
+              transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes heartbeat {
+    from {
+              transform: scale(1);
+              transform-origin: center center;
+              animation-timing-function: ease-out;
+    }
+    10% {
+              transform: scale(0.91);
+              animation-timing-function: ease-in;
+    }
+    17% {
+              transform: scale(0.98);
+              animation-timing-function: ease-out;
+    }
+    33% {
+              transform: scale(0.87);
+              animation-timing-function: ease-in;
+    }
+    45% {
+              transform: scale(1);
+              animation-timing-function: ease-out;
+    }
+  }
+
+  @keyframes wobble-hor-bottom {
+    0%,
+    100% {
+              transform: translateX(0%);
+              transform-origin: 50% 50%;
+    }
+    15% {
+              transform: translateX(-30px) rotate(-6deg);
+    }
+    30% {
+              transform: translateX(15px) rotate(6deg);
+    }
+    45% {
+              transform: translateX(-15px) rotate(-3.6deg);
+    }
+    60% {
+              transform: translateX(9px) rotate(2.4deg);
+    }
+    75% {
+              transform: translateX(-6px) rotate(-1.2deg);
+    }
+  }
+
+  @keyframes jello-horizontal {
+    0% {
+              transform: scale3d(1, 1, 1);
+    }
+    30% {
+              transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+              transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+              transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+              transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+              transform: scale3d(1.05, 0.95, 1);
+    }
+    100% {
+              transform: scale3d(1, 1, 1);
+    }
+  }
+
+.background{
+    background-image: url("../../assets/backGroundWelcomeClinic.jpg");
+    position: fixed;
+    top: 0%;
+    right: 0%;
+    z-index: 0;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+
+}
+
+.logo{
+    background-image: url("../../assets/logos/clinicaMedicaLogoAzulTres.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 250px;
+    height: 250px;
+    background-color: transparent;
+    border: transparent;
+    margin-top: 50px;
+    transition: 0.4s ease-in-out;
+    animation: heartbeat 1.5s infinite;
+}
+
+.container-home{
+    position: absolute;
+    width: 95%;
+    top: 2.5%;
+    right: 2.5%;
+    height: 95%;
+    background: rgba(0, 0, 0, 0.578);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(33.7px);
+    -webkit-backdrop-filter: blur(11.7px);
+    justify-content: center;
+    text-align: center;
+    border-radius: 55px;
+    animation: puff-in-center 0.5s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+}
+
+h1{
+    margin-top: 20px;
+    font-family: 'medicalFont';
+    font-size: 80px;
+    text-shadow: 1px 1px black;
+    color: whitesmoke;
+}
+
+h2{
+    font-family: 'medicalFont';
+    font-size: 50px;
+    text-shadow: 1px 1px black;
+    color: whitesmoke;
+}
+
+h3{
+    font-family: 'medicalFont';
+    font-size: 35px;
+    text-shadow: 1px 1px black;
+    color: whitesmoke;
+}
+
+.div-buttons-choice{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 10%;
+    display: flex;
+  }
+  
+  .div-choice-register{
+    background: rgba(0, 0, 0, 0);
+    border-radius: 50%;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.6px);
+    -webkit-backdrop-filter: blur(8.6px);
+    padding: 20px;
+    width: 220px;
+    height: 220px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    animation: 0.5s ease-in-out 0s 1 swirl-in-fwd;
+  }
+  
+  .img-register-both{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: transparent;
+    color: rgb(36, 159, 181);
+    width: 180px;
+    height: 180px;
+    border: 5px solid rgb(36, 159, 181);
+    border-radius: 50%;
+  }
+
+  .img-register-admin{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: transparent;
+    color: rgb(36, 159, 181);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+  }
+  
+  .button-hover:hover{
+    animation: wobble-hor-bottom 1s infinite both;
+  
+  }
+
+  p{
+    font-family: 'medicalFont';
+    font-size: 20px;
+    text-shadow: 1px 1px black;
+    color: whitesmoke;
+  }
+
+
+  .listados-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #fff;
+    font-family: 'medicalFont';
+  }
+  
+  .listas {
+    display: flex;
+    gap: 40px;
+    width: 90%;
+    justify-content: center;
+    height: 600px;
+  }
+  
+  .lista {
+    background: transparent;
+    border-radius: 20px;
+    padding: 10px;
+    width: 45%;
+    max-height: 80vh; 
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+  
+  .card {
+    background: rgba(0, 75, 110, 0.7);
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+  }
+  
+  .card-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .textos {
+    flex: 1;
+    text-align: left;
+  }
+  
+  .textos .nombre {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  
+  .textos p {
+    margin: 3px 0;
+  }
+  
+  .foto {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 15px;
+    border: 2px solid #fff;
+    transition: 0.5s ease-in-out;
+  }
+
+  .foto:hover{
+    transform: scale(1.2);
+  }
+
+  .listas::-webkit-scrollbar {
+    display: none;
+  }
+
+  .lista::-webkit-scrollbar {
+    display: none;
+  }
+
+  .state-pending{
+    background: rgba(0, 100, 110, 0.7);
+  }
+
+  .state-accepted{
+    background: rgba(12, 155, 7, 0.568);
+  }
+
+
+  .div-reset{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.6px);
+    -webkit-backdrop-filter: blur(8.6px);
+    padding: 10px;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    transition: 1s ease-in-out;
+    font-family: 'medicalFont';
+    color: #ffffff;
+    animation: 0.5s ease-in-out 0s 1 swirl-in-fwd;
+  }
+
+  .div-aprove-selected{
+    border-radius: 25px;
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.6px);
+    -webkit-backdrop-filter: blur(8.6px);
+    padding: 20px;
+    display: flex;
+    width: 300px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    transition: 1s ease-in-out;
+    font-family: 'medicalFont';
+    color: #ffffff;
+    animation: 0.5s ease-in-out 0s 1 swirl-in-fwd;
+  }
+
+  .slide-anim{
+    animation: 0.8s ease-in-out 0s 1 slide-in-top;
+  }
+
+  .specialist-modal{
+    position: absolute;
+    width: 60%;
+    border-radius: 35px;
+    height: 60%;
+    top: 30%;
+    left: 20%;
+    background: rgba(0, 0, 0, 0.474);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(60.5px);
+    -webkit-backdrop-filter: blur(60.5px);
+    padding: 25px;
+    transform: scale(1);
+    transition: transform 0.4s, top 0.4s;
+  }
+
+.text-alert{
+    font-family: 'medicalFont';
+    font-size: 25px;
+    color: whitesmoke;
+}
+
+.message{
+    position: absolute;
+    width: 30%;
+    border-radius: 35px;
+    left: 2.5%;
+    top: 5%;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(14.5px);
+    -webkit-backdrop-filter: blur(14.5px);
+    padding: 30px;
+    transform: scale(1);
+    transition: transform 0.4s, top 0.4s;
+    z-index: 5000;
+
+    hr.rounded {
+        border-top: 5px solid #ffffff;
+        border-radius: 3px;
+        width: 80%;
+    }
+  }
+
+  .hide-shortcuts{
+    transform: scale(0.0000001);
+    //display: none;
+    z-index: 5000;
+  }
+
+  .error{
+    background: rgba(105, 39, 46, 0.603);
+}
+
+.success{
+    background: rgba(68, 152, 66, 0.603);
+}
+
+.input-text{
+    padding: 20px;
+    height: 70px;
+    width: 70%;
+    font-family: 'medicalFont';
+    border-radius: 10px;
+    font-size: 25px;
+    background-color: lightyellow;
+    transition: 1.2s ease-in-out;
+}
+
+.previews{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    gap: 30px;
+  }
+  
+  .password-container {
+      position: relative;
+      width: 30%;
+      font-family: 'medicalFont';
+      border-radius: 10px;
+  
+      background-color: lightyellow;
+    }
+    
+    .password-container input {
+      width: 100%;
+      height: 70px;
+      padding: 20px 40px 20px 20px; /* espacio para el botón */
+      font-size: 25px;
+      background-color: lightyellow;
+      border-radius: 10px;
+    }
+    
+    .password-container .toggle-btn {
+      position: absolute;
+      right: 3%;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #555;
+      font-size: 30px;
+    }
+    
+    .password-container .toggle-btn:hover {
+      color: #000;
+    }
+
+    .file-input-clean {
+        color: transparent;
+      }
+      
+      .file-input-clean::-webkit-file-upload-button {
+        visibility: visible;
+        color: white;
+        background: #007bff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      
+      .file-input-clean::file-selector-button {
+        visibility: hidden;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      
+      .container-img-preview-large{
+        font-family: 'latoFont';
+        position: absolute;
+        width: 30%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10%;
+        top: 20%;
+        left: 35%;
+        background: rgba(36, 159, 181, 0.478);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(14.5px);
+        -webkit-backdrop-filter: blur(14.5px);
+        padding: 15px;
+        transform: scale(0.0000001);
+        transition: transform 0.4s, top 0.4s;
+        z-index: -1;
+        z-index: 5000;
+      }
+      
+      .container-img-preview-large::-webkit-scrollbar {
+        display: none;
+      }
+      
+      .open-img-preview-large{
+        transform: scale(1);
+        top: 15.7%;
+        z-index: 5000;
+      }
+
+
+      .form-pacient{
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .img-camera{
+        background-image: url("../../assets/forms/cameraClinica.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        border: transparent;
+        width: 80px;
+        height: 80px;
+      }
+
+      .div-signUpIn{
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(8.6px);
+        -webkit-backdrop-filter: blur(8.6px);
+        padding: 20px;
+        width: 180px;
+        height: 180px;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        transition: 1s ease-in-out;
+        font-family: 'medicalFont';
+        font-size: 20px;
+        color: #ffffff;
+      }
+
+      .required{
+        border-right: 10px solid crimson;
+      }
+
+
+      .text-danger{
+        font-size: 25px;
+        animation: 0.8s ease-in-out 0s 1 slide-in-top;
+        font-family: 'medicalFont';
+      }
+
+      .jello-animation{
+        animation: jello-horizontal 1.2s ease-in-out infinite both;
+      }
+
+      .swirl-anim{
+        animation: 0.8s ease-in-out 0s 1 swirl-in-fwd;
+      }
+
+      .error-form{
+        border: 5px solid rgba(187, 36, 51, 0.603);
+      }
+      
+      .success-form{
+       border: 5px solid green;
+      }
+
+      .selector-insurance{
+        padding: 10px;
+        height: 70px;
+        width: 29.5%;
+        font-family: 'medicalFont';
+        border-radius: 10px;
+        font-size: 25px;
+        background-color: lightyellow;
+        transition: 1.2s ease-in-out;
+      }
+
+      label{
+        font-family: 'medicalFont';
+        font-size: 30px;
+        text-shadow: 1px 1px black;
+        color: whitesmoke;
+        width: 11%;
+      }
+
+
+      .autocomplete-container {
+        position: relative;
+        width: 38%;
+      }
+      
+      .input-group {
+        display: flex;
+        gap: 8px;
+      }
+      
+      .input {
+        flex: 1;
+        padding: 6px;
+      }
+      
+      .sugerencias {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #ccc;
+        z-index: 10;
+        list-style: none;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        padding: 0;
+        margin: 4px 0 0;
+        max-height: 150px;
+        overflow-y: auto;
+      }
+      
+      .sugerencias li {
+        font-family: 'medicalFont';
+        font-size: 25px;
+        padding: 6px;
+        background-color: lightyellow;
+        cursor: pointer;
+      }
+      
+      .sugerencias li:hover {
+        background: #eee;
+      }
+      
+      .button-add{
+        background: transparent;
+        width: 50%;
+        border-radius: 15px;
+        border: 2px solid lightyellow;
+        font-family: 'medicalFont';
+        font-size: 20px;
+        color: white;
+      }
+      
+
+///////////////////////// SPINNER
+
+
+    @keyframes spin{
+        to{
+            transform: rotate(360deg);
+        }
+      }
+    
+      .spinner-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 4999;
+      }
+    
+      .spinner{
+        animation: spin 1.5s linear infinite;
+      }
+    
+    .spinner-logo{
+        background-image: url("../../assets/spinner/spinnerClinica.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 200px;
+        height: 200px;
+        background-color: transparent;
+        border: transparent;
+        transition: 0.4s ease-in-out;
+        animation: heartbeat 1.5s infinite;
+    }

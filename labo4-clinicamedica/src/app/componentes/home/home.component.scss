@@ -1,0 +1,241 @@
+@keyframes fade-in {
+    0% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes puff-in-center {
+    0% {
+      -webkit-transform: scale(2);
+              transform: scale(2);
+      -webkit-filter: blur(4px);
+              filter: blur(4px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+  }
+
+  @keyframes swirl-in-fwd {
+    0% {
+              transform: rotate(-540deg) scale(0);
+      opacity: 0;
+    }
+    100% {
+              transform: rotate(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes heartbeat {
+    from {
+              transform: scale(1);
+              transform-origin: center center;
+              animation-timing-function: ease-out;
+    }
+    10% {
+              transform: scale(0.91);
+              animation-timing-function: ease-in;
+    }
+    17% {
+              transform: scale(0.98);
+              animation-timing-function: ease-out;
+    }
+    33% {
+              transform: scale(0.87);
+              animation-timing-function: ease-in;
+    }
+    45% {
+              transform: scale(1);
+              animation-timing-function: ease-out;
+    }
+  }
+
+  @keyframes wobble-hor-bottom {
+    0%,
+    100% {
+              transform: translateX(0%);
+              transform-origin: 50% 50%;
+    }
+    15% {
+              transform: translateX(-30px) rotate(-6deg);
+    }
+    30% {
+              transform: translateX(15px) rotate(6deg);
+    }
+    45% {
+              transform: translateX(-15px) rotate(-3.6deg);
+    }
+    60% {
+              transform: translateX(9px) rotate(2.4deg);
+    }
+    75% {
+              transform: translateX(-6px) rotate(-1.2deg);
+    }
+  }
+
+.background{
+    background-image: url("../../assets/backGroundWelcomeClinic.jpg");
+    position: fixed;
+    top: 0%;
+    right: 0%;
+    z-index: 0;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+
+}
+
+.logo{
+    background-image: url("../../assets/logos/clinicaMedicaLogoAzulTres.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 250px;
+    height: 250px;
+    background-color: transparent;
+    border: transparent;
+    margin-top: 50px;
+    transition: 0.4s ease-in-out;
+    animation: heartbeat 1.5s infinite;
+}
+
+.container-home{
+    position: absolute;
+    width: 95%;
+    top: 2.5%;
+    right: 2.5%;
+    height: 95%;
+    background: rgba(0, 0, 0, 0.578);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(33.7px);
+    -webkit-backdrop-filter: blur(11.7px);
+    justify-content: center;
+    text-align: center;
+    border-radius: 55px;
+    animation: puff-in-center 0.5s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+}
+
+h1{
+    margin-top: 20px;
+    font-family: 'medicalFont';
+    font-size: 80px;
+    text-shadow: 1px 1px black;
+    color: whitesmoke;
+}
+
+h2{
+    font-family: 'medicalFont';
+    font-size: 50px;
+    text-shadow: 1px 1px black;
+    color: whitesmoke;
+}
+
+h3{
+    font-family: 'medicalFont';
+    font-size: 35px;
+    text-shadow: 1px 1px black;
+    color: whitesmoke;
+}
+
+.div-buttons-choice{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 10%;
+    display: flex;
+  }
+  
+  .div-choice-register{
+    background: rgba(0, 0, 0, 0);
+    border-radius: 50%;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.6px);
+    -webkit-backdrop-filter: blur(8.6px);
+    padding: 20px;
+    width: 220px;
+    height: 220px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    animation: 0.5s ease-in-out 0s 1 swirl-in-fwd;
+  }
+  
+  .img-register-both{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: transparent;
+    color: rgb(36, 159, 181);
+    width: 180px;
+    height: 180px;
+    border: 5px solid rgb(36, 159, 181);
+    border-radius: 50%;
+  }
+  
+  .button-hover:hover{
+    animation: wobble-hor-bottom 1s infinite both;
+  
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ///////////////////////// SPINNER
+
+
+  @keyframes spin{
+    to{
+        transform: rotate(360deg);
+    }
+  }
+
+  .spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 4999;
+  }
+
+  .spinner{
+    animation: spin 1.5s linear infinite;
+  }
+
+.spinner-logo{
+    background-image: url("../../assets/spinner/spinnerClinica.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+    background-color: transparent;
+    border: transparent;
+    transition: 0.4s ease-in-out;
+    animation: heartbeat 1.5s infinite;
+}

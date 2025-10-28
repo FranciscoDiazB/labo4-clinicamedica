@@ -50,10 +50,29 @@
 
     <div class="container-shortcuts hide-shortcuts" id="shortcuts">
 
+        <div style="display: flex; justify-content: center; align-items: center; justify-items: center; gap: 40px">
 
+            <h2>Usuarios del Sistema</h2>
+        </div>
+        <br>
+        <div style="display: flex; justify-content: center; align-items: center; justify-items: center; gap: 3%; margin-bottom: 20px;">
+            
+            <img class="img-preview-shortcuts patients" (click)="fillUserOnShortcuts(1)" src="https://vxycsgamgbyfdomexise.supabase.co/storage/v1/object/public/clinica/pacientes/DNI-37189209/imagen2.jpg" alt="esteban">
+
+            <img class="img-preview-shortcuts patients" (click)="fillUserOnShortcuts(2)" src="https://vxycsgamgbyfdomexise.supabase.co/storage/v1/object/public/clinica/pacientes/DNI-45901234/imagen2.jpg" alt="maria">
+
+            <img class="img-preview-shortcuts patients" (click)="fillUserOnShortcuts(3)" src="https://vxycsgamgbyfdomexise.supabase.co/storage/v1/object/public/clinica/pacientes/DNI-17567099/imagen1.jpg" alt="diego">
+
+            <img class="img-preview-shortcuts medics" (click)="fillUserOnShortcuts(4)" src="https://vxycsgamgbyfdomexise.supabase.co/storage/v1/object/public/clinica/especialistas/DNI-36891009/imagen.jpg" alt="clara">
+
+            <img class="img-preview-shortcuts medics" (click)="fillUserOnShortcuts(5)" src="https://vxycsgamgbyfdomexise.supabase.co/storage/v1/object/public/clinica/especialistas/DNI-32980103/imagen.jpg" alt="fernando">
+
+            <img class="img-preview-shortcuts admin" (click)="fillUserOnShortcuts(6)" src="https://vxycsgamgbyfdomexise.supabase.co/storage/v1/object/public/clinica/administradores/DNI-34129887/imagen.jpg" alt="admin">
+
+        </div>
     </div>
 
-    <button class="register-link text-hover">¿No tiene cuenta? Registrese...</button>
+    <button class="register-link text-hover" (click)="goTo('register')">¿No tiene cuenta? Registrese...</button>
     <br><br>
     <button class="button-login button-hover" (click)="loginUser()">Ingresar</button>
 </div>

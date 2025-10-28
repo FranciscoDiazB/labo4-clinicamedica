@@ -1,0 +1,598 @@
+<div class="background">
+
+</div>
+
+<div class="message hide-shortcuts" [ngClass]="{'error': alertNumber === 1, 'success': alertNumber === 2}" id="alert-message" style="justify-content: center; align-items: center;" >
+    <!--<button style="background-color: transparent; border: transparent;">
+        <i class="fa-regular fa-circle-xmark" style="font-size: 2.5vw; position: absolute; top: 5%; right: 5%;" (click)="toggleAlertMessage(true)"></i>
+    </button> -->
+    <i *ngIf="alertNumber == 1" class="fa-regular fa-circle-xmark" style="font-size: 30px; position: absolute; right: 10%; color: whitesmoke;"> Error</i>
+    <i *ngIf="alertNumber == 2" class="fa-regular fa-circle-check" style="font-size: 30px; position: absolute; right: 10%; color: whitesmoke;"> Logro</i>
+    <br>
+    <h2>{{alertTitle}}</h2>
+    <hr class="rounded">
+    <p class="text-alert">{{alertMessage}}</p>
+
+</div>
+
+@if (spinner) {
+
+    <div class="spinner-overlay">
+        <div class="spinner">
+            <button class="spinner-logo" disabled="true"></button>
+        </div>
+        <h2>Cargando...</h2>
+    </div>
+}
+
+<div class="container-home">
+
+    @if (!showUsersOnSystem && !enableSpecialist && !registerNewAdmin) {
+
+        <div style="justify-items: center; align-items: center; display: flex; justify-content: center; gap: 2.5%;">
+            <h1>Usuarios</h1>
+            <button class="logo" disabled="true"></button>
+        </div>
+        <br>
+    
+        @if (profileUser === 'Admin') {
+            <h2>Sección Usuarios. Solo perfil de "Admin"</h2>
+            <hr style="width: 55%;">
+            <h3>Ingrese en algunas de las opciones que se muestran a continuación.</h3>
+            <br><br>
+            <div class="div-buttons-choice">
+        
+                <div style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+            
+                    <div class="div-choice-register button-hover">
+                        <button class="img-register-both" (click)="enableFlags(1)" ><i style="font-size: 60px; background: transparent;" class="fa-solid fa-users"></i></button>
+                    </div>
+                    <h2>Usuarios <br> en Sistema</h2>
+                </div>
+    
+                <div style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+            
+                    <div class="div-choice-register button-hover">
+                        <button class="img-register-both" (click)="enableFlags(2)" ><i style="font-size: 60px; background: transparent;" class="fa-solid fa-user-check"></i></button>
+                    </div>
+                    <h2>Habilitar <br> Especialistas</h2>
+                </div>
+    
+                <div style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+            
+                    <div class="div-choice-register button-hover">
+                        <button class="img-register-both" (click)="enableFlags(3)" ><i style="font-size: 60px; background: transparent;" class="fa-solid fa-user-plus"></i></button>
+                    </div>
+                    <h2>Registrar <br> Usuarios</h2>
+                </div>
+                
+            </div>
+        }
+        @else {
+            <h2>Esta sección está limitada unicamente para usuarios con perfil "Administrador".</h2>
+            <hr style="width: 85%;">
+            <h3>Disculpe las Molestias.</h3>
+            <br><br>
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 140px; background: transparent; color: rgb(36, 159, 181);" ></i>
+        }
+
+    }
+
+    <div class="div-reset" *ngIf="showUsersOnSystem || enableSpecialist || registerNewAdmin">
+        <button type="button" (click)="resetAll()" class="img-register-both" style="width: 70px; height: 70px;">
+            <i style="font-size: 30px; background: transparent;" class="fa-solid fa-backward"></i>
+        </button>
+    </div>
+
+    @if(showUsersOnSystem){
+
+
+        <div class="listados-container slide-anim">
+            <h1>Listado de Usuarios en el sistema.</h1>
+            <br><br><br>
+            <div style="width: 100%; justify-content: center; align-items: center; align-content: center; display: flex; gap: 30%">
+                
+                <h2>Pacientes</h2>
+                <h2>Especialistas</h2>
+            </div>
+            <br>
+            <div class="listas">
+              <!-- Pacientes -->
+              <div class="lista">
+                @for (p of patientsOnSystemList; track $index) {
+
+                    <div class="card">
+                      <div class="card-content">
+                        <div class="textos">
+                          <h3>{{ p.nombre }} {{ p.apellido }}</h3>
+                          <p>{{ p.edad }} años</p>
+                          <p>DNI: {{ p.dni }}</p>
+                          <p>Obra Social: {{ p.obra_soc }}</p>
+                        </div>
+                        <img [src]="p.fotoUno" alt="foto paciente" class="foto" />
+                      </div>
+                    </div>
+                }
+              </div>
+          
+              <!-- Especialistas -->
+              <div class="lista">
+                @for (s of specialistsOnSystemList; track $index) {
+
+                    <div class="card" [ngClass]="{'state-pending': s.estado === 'Pendiente', 'state-accepted': s.estado === 'Aprobado'}">
+                      <div class="card-content">
+                        <div class="textos">
+                          <p class="nombre">{{ s.nombre }} {{ s.apellido }}</p>
+                          <p>{{ s.edad }} años</p>
+                          <p>DNI: {{ s.dni }}</p>
+                          <p>Especialidad: {{ s.espe }}</p>
+                          <p>Estado: {{ s.estado }}</p>
+                        </div>
+                        <img [src]="s.foto" alt="foto especialista" class="foto" />
+                      </div>
+                    </div>
+                }
+              </div>
+            </div>
+          </div>
+    }
+
+    @if(registerNewAdmin){
+
+        @if(!registerAdminFlag && !registerMedicFlago && !registerPatietnFlag){
+            <br><br><br>
+            <h1>Usuarios <i style="background: transparent;" class="fa-solid fa-user-plus"></i></h1>
+            <br><br><br><br>
+            <h2>Registrar nuevos usuarios.</h2>
+            <hr style="width: 55%;">
+            <h3>Ingrese en algunas de las opciones que se muestran a continuación.</h3>
+            <br><br><br><br><br>
+            <div class="div-buttons-choice">
+        
+                <div style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+            
+                    <div class="div-choice-register button-hover">
+                        <button class="img-register-both" (click)="showCorrectForm(1)" ><i style="font-size: 60px; background: transparent;" class="fa-solid fa-user-shield"></i></button>
+                    </div>
+                    <h2>Administrador</h2>
+                </div>
+    
+                <div style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+            
+                    <div class="div-choice-register button-hover">
+                        <button class="img-register-both" (click)="showCorrectForm(2)" ><i style="font-size: 60px; background: transparent;" class="fa-solid fa-user-doctor"></i></button>
+                    </div>
+                    <h2>Especialista</h2>
+                </div>
+    
+                <div style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+            
+                    <div class="div-choice-register button-hover">
+                        <button class="img-register-both" (click)="showCorrectForm(3)" ><i style="font-size: 60px; background: transparent;" class="fa-solid fa-user"></i></button>
+                    </div>
+                    <h2>Paciente</h2>
+                </div>
+                
+            </div>
+        }
+
+        @if(registerAdminFlag){
+            <form [formGroup]="registerAdmin" (ngSubmit)="onSubmitAdmin()">
+                <div style="margin-top: 30px;" class="form-pacient">
+                    <h1><i class="fa-solid fa-user-shield"></i> Registrar nuevo Administrador</h1>
+                    <br>
+                    <h2 class="slide-anim">Información del Administrador</h2>
+                        <input [ngClass]="{'required': justName?.hasError('required')}" class="input-text slide-anim" type="text" formControlName="name" placeholder="Nombre">
+                        <ng-container *ngIf="justName?.hasError('pattern')">
+                            <p class="text-danger">Solo letras para este campo.</p>
+                        </ng-container>
+                        <input [ngClass]="{'required': justSurname?.hasError('required')}" class="input-text slide-anim" type="text" formControlName="surname" placeholder="Apellido">
+                        <ng-container *ngIf="justSurname?.hasError('pattern')">
+                            <p class="text-danger">Solo letras para este campo.</p>
+                        </ng-container>
+                
+                        <div class="slide-anim" style="justify-items: center; align-items: center; display: flex; gap: 1%; width: 100%; justify-content: center;">
+                        
+                            <input [ngClass]="{'required': justAge?.hasError('required')}" class="input-text" style="width: 25%;" type="number" formControlName="age" placeholder="Edad">
+                            <input [ngClass]="{'required': justIdentity?.hasError('required')}" class="input-text" style="width: 44%;" type="number" formControlName="identity" placeholder="DNI">
+                        </div>
+                        <ng-container *ngIf="justAge?.hasError('max')">
+                            <p class="text-danger">Edad Máxima de 65 años.</p>
+                        </ng-container>
+                        <ng-container *ngIf="justAge?.hasError('min')">
+                            <p class="text-danger">Edad Mínima de 24 años.</p>
+                        </ng-container>
+                        <ng-container *ngIf="justIdentity?.hasError('max')">
+                            <p class="text-danger">El Máximo de Caracteres es 9.</p>
+                        </ng-container>
+                        <ng-container *ngIf="justIdentity?.hasError('min')">
+                            <p class="text-danger">El Mínimo de Caracteres es 7.</p>
+                        </ng-container>
+                </div>
+                        
+                <div class="form-pacient" id="account-data">
+        
+                    <div class="slide-anim" style="justify-items: center; align-items: center; display: flex; gap: 20px; width: 100%; justify-content: center;">
+                                
+                        <input class="input-text" [ngClass]="{'required': justEmail?.hasError('required')}" type="text" style="width: 39.5%;" formControlName="email" placeholder="Correo Electrónico">
+                        
+                        <div class="password-container">
+                            <input [type]="showPassword ? 'text' : 'password'" [ngClass]="{'required': justPassword?.hasError('required')}" formControlName="password" placeholder="Contraseña"/>
+                            <button type="button" class="toggle-btn" (click)="togglePassword()">
+                                <i class="fa" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="justEmail?.hasError('email')">
+                        <p class="text-danger">No es formato Válido para Correo Electrónico.</p>
+                    </ng-container>
+                    <ng-container *ngIf="justPassword?.value?.length < 6">
+                        <p class="text-danger">Como minimo 6 caracteres.</p>
+                    </ng-container>
+                </div>
+        
+                <br><br><br>
+                <div class="previews">
+                    <div style="display: flex; justify-content: center; justify-items: center; align-items: center; gap: 30px;">
+                        <h2 class="slide-anim">Foto del Admin: </h2>
+                        <div class="div-signUpIn" [ngClass]="{'jello-animation': justImage?.hasError('required')}" style="width: 130px; height: 130px; border-radius: 35px;">
+                            <input type="file" class="img-camera file-input-clean" (change)="onImagesSelected($event)" />
+                        </div>
+                    </div>
+                
+                    <div class="previews">
+                        <img class="jello-animation" style="border-radius: 50%; border: 4px solid rgb(28, 122, 139);" (click)="closeOpenPreview(imagePreview)"
+                        *ngIf="imagePreview" [src]="imagePreview" [src]="" width="100" height="100"/>
+                    </div>
+        
+                </div>
+                        
+                    <div class="container-img-preview-large" id="img-pre-large">
+                        <img style="border: 2px solid #ECDBC9; border-radius: 24px; max-width: 95%;" [src]="imagePreviewMax" alt="Foto 1"/>
+                    </div>
+                <br>
+                <br><br>
+
+                @if (registerAdmin.valid) {
+                    <re-captcha class="swirl-anim" style="position: fixed; top: 80%; left: 5%;"
+                        siteKey="6LcRS_orAAAAAMlyLf0tQWselUoNnsS7KGRkWClS"
+                        (resolved)="captchaValid = true">
+                    </re-captcha>
+                }
+
+                <div class="div-signUpIn swirl-anim button-hover" [ngClass]="{'error-form': registerAdmin.invalid || !captchaValid, 
+                'success-form': registerAdmin.valid && captchaValid}" style="position: absolute; bottom: 7%; right: 5%;">
+                    <button type="submit" [disabled]="registerAdmin.invalid || !captchaValid" class="img-register-admin" style="width: 140px; height: 140px;">
+                        <i style="font-size: 60px; background: transparent;" class="fa-solid fa-user-shield"></i>
+                        <br>
+                        <p>Registrar</p>
+                    </button>
+                </div>          
+            </form>
+        }
+
+
+        @if(registerMedicFlago){
+
+            <form [formGroup]="registerMedic" (ngSubmit)="onSubmitMedic()">
+
+                    <div class="form-pacient slide-anim" id="personal-data">
+                        <h1><i class="fa-solid fa-user-doctor"></i> Registrar nuevo Especialista</h1>
+                        <br>
+                        <h2 class="slide-anim">Información del Especialista</h2>
+                        <input [ngClass]="{'required': registerMedic.get('nameM')?.hasError('required')}" class="input-text" type="text" formControlName="nameM" placeholder="Nombre">
+                        <ng-container *ngIf="registerMedic.get('nameM')?.hasError('pattern')">
+                            <p class="text-danger">Solo letras para este campo.</p>
+                        </ng-container>
+                        <input [ngClass]="{'required': registerMedic.get('surnameM')?.hasError('required')}" class="input-text" type="text" formControlName="surnameM" placeholder="Apellido">
+                        <ng-container *ngIf="registerMedic.get('surnameM')?.hasError('pattern')">
+                            <p class="text-danger">Solo letras para este campo.</p>
+                        </ng-container>
+                
+                        <div style="justify-items: center; align-items: center; display: flex; gap: 1%; width: 100%; justify-content: center;">
+                        
+                            <input [ngClass]="{'required': registerMedic.get('ageM')?.hasError('required')}" class="input-text" style="width: 10%;" type="number" formControlName="ageM" placeholder="Edad">
+                            <input [ngClass]="{'required': registerMedic.get('identityM')?.hasError('required')}" class="input-text" style="width: 20%;" type="number" formControlName="identityM" placeholder="DNI">
+                            <!-- <input class="input-text" style="width: 28.5%;" type="" placeholder="Obra Social"> -->
+                            <div class="autocomplete-container">
+                                <div class="input-group">
+                                  <input
+                                    class="input-text"
+                                    [ngClass]="{'required': registerMedic.get('specialtyM')?.hasError('required')}"
+                                    style="width: 100%;"
+                                    type="text"
+                                    [formControl]="specialtyControl"
+                                    formControlName="specialtyM"
+                                    placeholder="Ingrese la especialidad..."
+                                  />
+                                  <button class="button-add" (click)="addSpecialty()" type="button"> Agregar</button>
+                                </div>
+                              
+                                <ul *ngIf="suggestions.length > 0" class="sugerencias">
+                                  <li
+                                    *ngFor="let esp of suggestions"
+                                    (click)="selectSpecialty(esp.descripcion)"
+                                  >
+                                    {{ esp.descripcion }}
+                                  </li>
+                                </ul>
+                              
+                                <label *ngIf="loading">Buscando...</label>
+                              </div>
+                        </div>
+                        <ng-container *ngIf="registerMedic.get('ageM')?.hasError('max')">
+                            <p class="text-danger">Edad Máxima de 65 años.</p>
+                        </ng-container>
+                        <ng-container *ngIf="registerMedic.get('ageM')?.hasError('min')">
+                            <p class="text-danger">Edad Mínima de 24 años.</p>
+                        </ng-container>
+                        <ng-container *ngIf="registerMedic.get('identityM')?.hasError('max')">
+                            <p class="text-danger">El Máximo de Caracteres es 9.</p>
+                        </ng-container>
+                        <ng-container *ngIf="registerMedic.get('identityM')?.hasError('min')">
+                            <p class="text-danger">El Mínimo de Caracteres es 7.</p>
+                        </ng-container>
+                    </div>
+        
+                
+                        <div class="form-pacient" id="account-data">
+        
+                            <div class="slide-anim" style="justify-items: center; align-items: center; display: flex; gap: 20px; width: 100%; justify-content: center;">
+                                
+                                <input class="input-text" type="text" [ngClass]="{'required': registerMedic.get('emailM')?.hasError('required')}" 
+                                style="width: 39.5%;" formControlName="emailM" placeholder="Correo Electrónico">
+                        
+                                <div class="password-container">
+                                    <input [type]="showPassword ? 'text' : 'password'" formControlName="passwordM" placeholder="Contraseña"
+                                    [ngClass]="{'required': registerMedic.get('passwordM')?.hasError('required')}" />
+                                    <button type="button" class="toggle-btn" (click)="togglePassword()">
+                                          <i class="fa" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+                                    </button>
+                                </div>
+                            </div>
+        
+                            <ng-container *ngIf="registerMedic.get('emailM')?.hasError('email')">
+                                <p class="text-danger">No es formato Válido para Correo Electrónico.</p>
+                            </ng-container>
+                            <ng-container *ngIf="registerMedic.get('passwordM')?.value?.length < 6">
+                                <p class="text-danger">Como minimo 6 caracteres.</p>
+                            </ng-container>
+                        </div>
+                        <br><br><br>
+
+                        
+                        <div class="previews">
+                            <div style="display: flex; justify-content: center; justify-items: center; align-items: center; gap: 30px;">
+                                
+                                    <h2 class="slide-anim">Foto del Especialista: </h2>
+                                    <div class="div-signUpIn" [ngClass]="{'jello-animation': registerMedic.get('image_oneM')?.hasError('required')}" style="width: 130px; height: 130px; border-radius: 35px;">
+                                        <input type="file" class="img-camera file-input-clean" (change)="onImagesSelectedMP($event, 2)"/>
+                                    </div>
+                                </div>
+                
+                                <div class="previews">
+                                    <img class="jello-animation" style="border-radius: 50%; border: 4px solid rgb(28, 122, 139);" (click)="closeOpenPreview(imagePreview)" 
+                                    *ngIf="imagePreview" [src]="imagePreview" width="100" height="100"/>
+                                    <img class="jello-animation" style="border-radius: 50%; border: 4px solid rgb(28, 122, 139);" (click)="closeOpenPreview(imagePreview2)" 
+                                    *ngIf="imagePreview2" [src]="imagePreview2" width="100" height="100"/>
+                                </div>
+        
+                            </div>  
+
+        
+                    <div class="container-img-preview-large" id="img-pre-large">
+                        <img style="border: 2px solid #ECDBC9; border-radius: 24px; max-width: 95%;" [src]="imagePreviewMax" alt="Foto 1"/>
+                    </div>
+                <br>
+                <br><br>
+
+                @if (registerMedic.valid) {
+                    <re-captcha class="swirl-anim" style="position: fixed; top: 80%; left: 5%;"
+                        siteKey="6LcRS_orAAAAAMlyLf0tQWselUoNnsS7KGRkWClS"
+                        (resolved)="captchaValid = true">
+                    </re-captcha>
+                }
+                
+                  <div class="div-signUpIn swirl-anim button-hover" [ngClass]="{'error-form': registerMedic.invalid || !captchaValid, 
+                    'success-form': registerMedic.valid && captchaValid}" style="position: absolute; bottom: 7%; right: 5%;">
+                    <button type="submit" [disabled]="registerMedic.invalid || !captchaValid" class="img-register-admin" style="width: 140px; height: 140px;">
+                        <i style="font-size: 60px; background: transparent;" class="fa-solid fa-user-doctor"></i>
+                        <br>
+                        <p>Registrar</p>
+                    </button>
+                </div>          
+            </form>
+        }
+
+        @if(registerPatietnFlag){
+
+            <form [formGroup]="registerPatient" (ngSubmit)="onSubmit()">
+
+                <div class="form-pacient slide-anim" id="personal-data">
+                    <h1><i class="fa-solid fa-user"></i> Registrar nuevo Paciente</h1>
+                    <br>
+                    <h2 class="slide-anim">Información del Paciente</h2>
+                    <input [ngClass]="{'required': registerPatient.get('nameP')?.hasError('required')}" class="input-text" type="text" formControlName="nameP" placeholder="Nombre">
+                    <ng-container *ngIf="registerPatient.get('nameP')?.hasError('pattern')">
+                        <p class="text-danger">Solo letras para este campo.</p>
+                    </ng-container>
+                    <input [ngClass]="{'required': registerPatient.get('surnameP')?.hasError('required')}" class="input-text" type="text" formControlName="surnameP" placeholder="Apellido">
+                    <ng-container *ngIf="registerPatient.get('surnameP')?.hasError('pattern')">
+                        <p class="text-danger">Solo letras para este campo.</p>
+                    </ng-container>
+            
+                    <div style="justify-items: center; align-items: center; display: flex; gap: 1.5%; width: 100%; justify-content: center;">
+                    
+                        <input [ngClass]="{'required': registerPatient.get('ageP')?.hasError('required')}" class="input-text" style="width: 10%;" type="number" formControlName="ageP" placeholder="Edad">
+                        <input [ngClass]="{'required': registerPatient.get('identityP')?.hasError('required')}" class="input-text" style="width: 15%;" type="number" formControlName="identityP" placeholder="DNI">
+                        <!-- <input class="input-text" style="width: 28.5%;" type="" placeholder="Obra Social"> -->
+                         <label for="insurance">Obra Social: </label>
+                        <select [ngClass]="{'required': registerPatient.get('insuranceP')?.hasError('required')}" class="selector-insurance" id="insurance" formControlName="insuranceP">
+                            <option class="" *ngFor="let item of options" [value]="item">
+                              {{ item }}
+                            </option>
+                        </select>
+                    </div>
+                    <ng-container *ngIf="registerPatient.get('ageP')?.hasError('max')">
+                        <p class="text-danger">Edad Máxima de 65 años.</p>
+                    </ng-container>
+                    <ng-container *ngIf="registerPatient.get('ageP')?.hasError('min')">
+                        <p class="text-danger">Edad Mínima de 24 años.</p>
+                    </ng-container>
+                    <ng-container *ngIf="registerPatient.get('identityP')?.hasError('max')">
+                        <p class="text-danger">El Máximo de Caracteres es 9.</p>
+                    </ng-container>
+                    <ng-container *ngIf="registerPatient.get('identityP')?.hasError('min')">
+                        <p class="text-danger">El Mínimo de Caracteres es 7.</p>
+                    </ng-container>
+                </div>
+    
+            
+                    <div class="form-pacient" id="account-data">
+    
+                        <div class="slide-anim" style="justify-items: center; align-items: center; display: flex; gap: 20px; width: 100%; justify-content: center;">
+                            
+                            <input class="input-text" type="text" style="width: 39.5%;"  formControlName="emailP" placeholder="Correo Electrónico"
+                            [ngClass]="{'required': registerPatient.get('emailP')?.hasError('required')}">
+                    
+                            <div class="password-container">
+                                <input [type]="showPassword ? 'text' : 'password'" formControlName="passwordP" placeholder="Contraseña"
+                                [ngClass]="{'required': registerPatient.get('passwordP')?.hasError('required')}"/>
+                                <button type="button" class="toggle-btn" (click)="togglePassword()">
+                                      <i class="fa" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+                                </button>
+                            </div>
+                        </div>
+    
+                        <ng-container *ngIf="registerPatient.get('emailP')?.hasError('email')">
+                            <p class="text-danger">No es formato Válido para Correo Electrónico.</p>
+                        </ng-container>
+                        <ng-container *ngIf="registerPatient.get('passwordP')?.value?.length < 6">
+                            <p class="text-danger">Como minimo 6 caracteres.</p>
+                        </ng-container>
+                    </div>
+                    <br><br><br>
+
+                    
+                    <div class="previews">
+                        <div style="display: flex; justify-content: center; justify-items: center; align-items: center; gap: 30px;">
+                            
+                                <h2 class="slide-anim">Fotos del Paciente (dos fotos): </h2>
+                                <div class="div-signUpIn" [ngClass]="{'jello-animation': registerPatient.get('image_twoP')?.hasError('required') &&
+                                    registerPatient.get('imageP')?.hasError('required')}" style="width: 130px; height: 130px; border-radius: 35px;">
+                                    <input type="file" class="img-camera file-input-clean" (change)="onImagesSelectedMP($event, 1)" multiple/>
+                                </div>
+                            </div>
+            
+                            <div class="previews">
+                                <img class="jello-animation" style="border-radius: 50%; border: 4px solid rgb(28, 122, 139);" (click)="closeOpenPreview(imagePreview)" 
+                                *ngIf="imagePreview" [src]="imagePreview" width="100" height="100"/>
+                                <img class="jello-animation" style="border-radius: 50%; border: 4px solid rgb(28, 122, 139);" (click)="closeOpenPreview(imagePreview2)" 
+                                *ngIf="imagePreview2" [src]="imagePreview2" width="100" height="100"/>
+                            </div>
+    
+                        </div>  
+
+    
+                <div class="container-img-preview-large" id="img-pre-large">
+                    <img style="border: 2px solid #ECDBC9; border-radius: 24px; max-width: 95%;" [src]="imagePreviewMax" alt="Foto 1"/>
+                </div>
+            <br>
+            <br><br>
+
+            @if (registerPatient.valid) {
+                <re-captcha class="swirl-anim" style="position: fixed; top: 80%; left: 5%;"
+                    siteKey="6LcRS_orAAAAAMlyLf0tQWselUoNnsS7KGRkWClS"
+                    (resolved)="captchaValid = true">
+                </re-captcha>
+            }
+            
+              <div class="div-signUpIn swirl-anim button-hover" [ngClass]="{'error-form': registerPatient.invalid || !captchaValid, 
+                'success-form': registerPatient.valid && captchaValid}" style="position: absolute; bottom: 7%; right: 5%;">
+                <button type="submit" [disabled]="registerPatient.invalid || !captchaValid" class="img-register-admin" style="width: 140px; height: 140px;">
+                    <i style="font-size: 60px; background: transparent;" class="fa-solid fa-user"></i>
+                    <br>
+                    <p>Registrar</p>
+                </button>
+            </div>          
+        </form>
+        }
+
+    }
+
+
+    @if(enableSpecialist){
+
+
+        <div class="listados-container slide-anim">
+            <h1>Habilitar Especialistas pendientes.</h1>
+            <br><br>
+            <h2>Hacer "Click" en el especialista para continuar.</h2>
+            <hr style="width: 55%;">
+            <br>
+            <div class="listas">
+
+                   <div class="lista">
+
+                    @if (pendingSpecialistsOnSystem.length > 0) {
+
+                     @for (s of pendingSpecialistsOnSystem; track $index) {
+     
+                         <div class="card" (click)="showId(s)" [ngClass]="{'state-pending': s.estado === 'Pendiente', 'state-accepted': s.estado === 'Aceptado'}">
+                           <div class="card-content">
+                             <div class="textos">
+                               <p class="nombre">{{ s.nombre }} {{ s.apellido }}</p>
+                               <p>{{ s.edad }} años</p>
+                               <p>DNI: {{ s.dni }}</p>
+                               <p>Especialidad: {{ s.espe }}</p>
+                               <p>Estado: {{ s.estado }}</p>
+                             </div>
+                             <img [src]="s.foto" alt="foto especialista" class="foto" />
+                           </div>
+                         </div>
+                     }
+                    }
+                    @else{
+                        <h3>No hay especialistas con estado "Pendiente" en el sistema.</h3>
+                        <br>
+                        <i style="font-size: 100px;" class="fa-solid fa-clipboard-list"></i>
+                    }
+                   </div>
+
+            </div>
+        </div>
+
+
+        <i class="fa-solid fa-circle-check"></i>
+        
+        <div class="specialist-modal hide-shortcuts" id="modal-special">
+
+            @if (selectedSpecialist !== null) {
+
+                <div class="div-reset" style="right: 5%; background-color: transparent;">
+                    <button type="button" (click)="showModalSpecialist(false)" class="img-register-both" style="width: 70px; height: 70px;">
+                        <i style="font-size: 30px; background: transparent;" class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div style="display: flex; justify-content: center; align-items: center; align-content: center; gap: 5%; width: 100%; height: 100%;" >
+
+                    <div style="flex-direction: column;">
+                        
+                        <h2 class="nombre">{{ selectedSpecialist.nombre }} {{ selectedSpecialist.apellido }}</h2>
+                        <h3>{{ selectedSpecialist.edad }} años</h3>
+                        <h3>DNI: {{ selectedSpecialist.dni }}</h3>
+                        <h3>{{ selectedSpecialist.espe }}</h3>
+                    </div>
+                    <img [src]="selectedSpecialist.foto" alt="foto especialista" class="foto" style="width: 250px; height: 250px;"/>
+                    <div class="div-aprove-selected" (click)="aproveSpecialistToEnter()" style="border: 2px solid rgb(36, 159, 181); cursor: pointer">
+                            <i style="font-size: 30px; background: transparent; position: absolute; left: 10%; color: rgb(36, 159, 181);" 
+                            class="fa-solid fa-circle-check">      Habilitar</i>
+                    </div>
+                </div>
+                
+            }
+        </div>
+    }
+   
+</div>

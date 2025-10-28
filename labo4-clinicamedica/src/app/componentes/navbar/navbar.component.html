@@ -1,6 +1,74 @@
 <nav class="navbar" [class.open]="isOpen">
-    <ul>
-      <li><a routerLink="/home" (click)="goTo('welcome')">Bienvenida</a></li>
-      <hr class="rounded">
+
+    <ul *ngIf="!session">
+
+      <ng-container >
+        <li><a (click)="goTo('welcome')">Bienvenida</a></li>
+        <hr class="rounded">
+      </ng-container>
+
     </ul>
-  </nav>
+
+    <ul *ngIf="session">
+
+      <ng-container  *ngIf="session">
+        <li class="animate-text" style="padding-left: 30px; font-size: 50px;">{{role}}</li>
+      </ng-container>
+      <br>
+
+      <ng-container>
+        <li><a (click)="goTo('home')">Inicio</a></li>
+        <hr class="rounded">
+      </ng-container>
+
+      <ng-container  *ngIf="role === 'Admin'">
+        <li><a (click)="goTo('users')">Usuarios</a></li>
+        <hr class="rounded">
+      </ng-container>
+
+      <ng-container *ngIf="role === 'Paciente'" >
+        <li><a (click)="logout()">Boton Paciente</a></li>
+        <hr class="rounded">
+      </ng-container>
+
+      <ng-container *ngIf="role === 'Especialista'" >
+        <li><a (click)="logout()">Boton Especialista</a></li>
+        <hr class="rounded">
+      </ng-container>
+
+      <ng-container>
+        <li><a (click)="goTo('profile')">Mi Perfil</a></li>
+        <hr class="rounded">
+      </ng-container>
+
+      <ng-container style="position: absolute; top: 80%;">
+        <li><a (click)="logout()">Cerrar sesión</a></li>
+        <hr class="rounded">
+      </ng-container>
+
+    </ul>
+
+    <!-- <ul *ngIf="session">
+
+      <ng-container *ngIf="role === 'Admin'">
+        <li><a routerLink="/dashboard">Dashboard</a></li>
+        <li><a routerLink="/usuarios">Usuarios</a></li>
+      </ng-container>
+  
+
+      <ng-container *ngIf="role === 'Especialista'">
+        <li><a routerLink="/turnos">Mis Turnos</a></li>
+        <li><a routerLink="/horarios">Horarios</a></li>
+      </ng-container>
+  
+
+      <ng-container *ngIf="role === 'Paciente'">
+        <li><a routerLink="/reservar">Reservar Turno</a></li>
+        <li><a routerLink="/historial">Historial</a></li>
+      </ng-container>
+  
+
+      <li><a (click)="logout()">Cerrar sesión</a></li>
+    </ul> -->
+
+</nav>

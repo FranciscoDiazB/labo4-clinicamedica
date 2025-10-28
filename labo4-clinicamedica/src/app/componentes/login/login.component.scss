@@ -63,7 +63,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    animation: kenburns-bottom-left 5s ease-out both;
 }
 
 .logo{
@@ -91,7 +90,6 @@
     -webkit-backdrop-filter: blur(11.7px);
     justify-content: center;
     text-align: center;
-    padding: 30px;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
     animation: slide-in-blurred-right 1.5s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
@@ -233,18 +231,43 @@ h2{
     }
   }
 
+
+.img-preview-shortcuts{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  transition: 0.5s ease-in-out;
+}
+
+.img-preview-shortcuts:hover{
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.patients{
+  border: 5px solid rgb(24, 126, 144);
+}
+
+.medics{
+  border: 5px solid rgb(212, 201, 151);
+}
+
+.admin{
+  border: 5px solid rgb(0, 196, 13);;
+}
+
 .container-shortcuts{
     position: absolute;
-    width: 80%;
-    height: 500px;
+    width: 92%;
     border-radius: 35px;
-    top: 28.7%;
-    left: 10%;
-    background: rgba(105, 39, 46, 0.603);
+    gap: 3%;
+    bottom: 5%;
+    left: 4%;
+    background: rgba(0, 0, 0, 0.474);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(30.5px);
-    -webkit-backdrop-filter: blur(30.5px);
-    padding: 15px;
+    backdrop-filter: blur(60.5px);
+    -webkit-backdrop-filter: blur(60.5px);
+    padding: 25px;
     transform: scale(1);
     transition: transform 0.4s, top 0.4s;
   }

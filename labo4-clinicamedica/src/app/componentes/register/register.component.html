@@ -28,6 +28,11 @@
 
 <div class="container-register">
 
+    <div *ngIf="formForMedics || formForPatients" class="div-reset">
+        <button type="button" (click)="resetAll()" class="img-backward" style="width: 50px; height: 50px;"></button>
+        Registro
+    </div>
+
     <div style="display: flex; justify-content: center; align-items: center; align-content: center; gap: 30px;">
 
         <button class="logo hover-logo" disabled="true"></button>
@@ -35,35 +40,338 @@
 
     </div>
 
-   
+    <div *ngIf="!formForMedics && !formForPatients" style="margin-top: 10%;" class="div-buttons-choice">
 
-    <div style="justify-items: center; align-items: center;">
-    </div>
+        <div style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
 
-    <div class="form-pacient">
-
-        <div style="display: flex; gap: 2%; width: 100%; justify-content: center;">
-            <input class="input-text" style="width: 34%;" type="text" placeholder="Nombre">
-            <input class="input-text" style="width: 34%;" type="text" placeholder="Apellido">
-
+            <div class="div-choice-register button-hover">
+                <button class="img-register-both" (click)="showFormPatient()" ><i style="font-size: 60px; background: transparent;" class="fa-solid fa-user"></i></button>
+            </div>
+            <h2>Registrar <br> Paciente</h2>
         </div>
-        <input class="input-text" type="text" placeholder="Correo Electrónico">
-        <input class="input-text" type="text" placeholder="Correo Electrónico">
 
-        <div class="password-container">
-            <input [type]="showPassword ? 'text' : 'password'" placeholder="Contraseña"/>
-            <button type="button" class="toggle-btn" (click)="togglePassword()">
-                  <i class="fa" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
-            </button>
+        <div style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center; ">
+            <div class="div-choice-register button-hover">
+                <button class="img-register-both" (click)="showFormMedics()"><i style="font-size: 60px; background: transparent;" class="fa-solid fa-user-doctor"></i></button>
+            </div>
+            <h2>Registrar <br> Especialista</h2>
         </div>
+       
     </div>
-    <br>
 
-    <div class="container-shortcuts hide-shortcuts" id="shortcuts">
+    @if(formForPatients){
+
+        <form [formGroup]="registerPatient" (ngSubmit)="onSubmit()">
+
+            @if (!firstPatientForm) {
+    
+                <div class="form-pacient slide-anim" id="personal-data">
+                    <h2><i class="fa-solid fa-user"></i> Datos Personales</h2>
+                    <input [ngClass]="{'required': justName?.hasError('required')}" class="input-text" type="text" formControlName="name" placeholder="Nombre">
+                    <ng-container *ngIf="justName?.hasError('pattern')">
+                        <p>Solo letras para este campo.</p>
+                    </ng-container>
+                    <input [ngClass]="{'required': justSurname?.hasError('required')}" class="input-text" type="text" formControlName="surname" placeholder="Apellido">
+                    <ng-container *ngIf="justSurname?.hasError('pattern')">
+                        <p>Solo letras para este campo.</p>
+                    </ng-container>
+            
+                    <div style="justify-items: center; align-items: center; display: flex; gap: 1.5%; width: 100%; justify-content: center;">
+                    
+                        <input [ngClass]="{'required': justAge?.hasError('required')}" class="input-text" style="width: 10%;" type="number" formControlName="age" placeholder="Edad">
+                        <input [ngClass]="{'required': justIdentity?.hasError('required')}" class="input-text" style="width: 15%;" type="number" formControlName="identity" placeholder="DNI">
+                        <!-- <input class="input-text" style="width: 28.5%;" type="" placeholder="Obra Social"> -->
+                         <label for="insurance">Obra Social: </label>
+                        <select [ngClass]="{'required': justInsurance?.hasError('required')}" class="selector-insurance" id="insurance" formControlName="insurance">
+                            <option class="" *ngFor="let item of options" [value]="item">
+                              {{ item }}
+                            </option>
+                        </select>
+                    </div>
+                    <ng-container *ngIf="justAge?.hasError('max')">
+                        <p>Edad Máxima de 110 años.</p>
+                    </ng-container>
+                    <ng-container *ngIf="justAge?.hasError('min')">
+                        <p>Edad Mínima de 15 años.</p>
+                    </ng-container>
+                    <ng-container *ngIf="justIdentity?.hasError('max')">
+                        <p>El Máximo de Caracteres es 9.</p>
+                    </ng-container>
+                    <ng-container *ngIf="justIdentity?.hasError('min')">
+                        <p>El Mínimo de Caracteres es 7.</p>
+                    </ng-container>
+                </div>
+            }
+    
+        
+            <div formGroupName="registerUserDataPatient">
+    
+                @if(firstPatientForm){
+            
+                    <div class="form-pacient" id="account-data">
+    
+                        <h2 class="slide-anim"><i class="fa-solid fa-user"></i> Información de la cuenta</h2>
+    
+                        <div class="slide-anim" style="justify-items: center; align-items: center; display: flex; gap: 20px; width: 100%; justify-content: center;">
+                            
+                            <input class="input-text" type="text" style="width: 30%;" formControlName="email" placeholder="Correo Electrónico">
+                    
+                            <div class="password-container">
+                                <input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Contraseña"/>
+                                <button type="button" class="toggle-btn" (click)="togglePassword()">
+                                      <i class="fa" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+                                </button>
+                            </div>
+                        </div>
+    
+                        <ng-container *ngIf="justEmail?.hasError('email')">
+                            <p>No es formato Válido para Correo Electrónico.</p>
+                        </ng-container>
+                        <ng-container *ngIf="justPassword?.value?.length < 6">
+                            <p>Como minimo 6 caracteres.</p>
+                        </ng-container>
+                    </div>
+                }
+            </div>
+    
+            @if(registerUserDataPatient.valid && firstPatientForm){
+    
+                <div formGroupName="imagePatient" class="form-pacient">
+    
+                    
+                        <h2 class="slide-anim">Fotos del Paciente (subir dos fotos)</h2>
+    
+                        <div class="previews">
+                            <div *ngIf="firstPatientForm" style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+            
+                                <div class="div-signUpIn" [ngClass]="{'jello-animation': imagePatient.invalid}" style="width: 130px; height: 130px; border-radius: 35px;">
+                                    <input type="file" class="img-camera file-input-clean" (change)="onImagesSelected($event, 1)" multiple/>
+                                </div>
+                            </div>
+            
+                            <div class="previews">
+                                <img class="jello-animation" style="border-radius: 50%; border: 4px solid rgb(28, 122, 139);" (click)="closeOpenPreview(imagePreview1)" 
+                                *ngIf="imagePreview1" [src]="imagePreview1" width="100" height="100"/>
+                                <img class="jello-animation" style="border-radius: 50%; border: 4px solid rgb(28, 122, 139);" (click)="closeOpenPreview(imagePreview2)" 
+                                *ngIf="imagePreview2" [src]="imagePreview2" width="100" height="100"/>
+                            </div>
+    
+                        </div>
+                    
+                        @if (registerPatient.valid) {
+                            <re-captcha class="swirl-anim" style="position: fixed; top: 80%; left: 5%; z-index: 10000;"
+                                siteKey="6LcRS_orAAAAAMlyLf0tQWselUoNnsS7KGRkWClS"
+                                (resolved)="captchaValid = true">
+                            </re-captcha>
+                        }
+    
+                </div>
+    
+                <div class="container-img-preview-large" id="img-pre-large">
+                    <img style="border: 2px solid #ECDBC9; border-radius: 24px; max-width: 95%;" [src]="imagePreview" alt="Foto 1"/>
+                </div>
+            }
+            <br>
+            <br><br>
+            <div class="div-buttons-short">
+        
+                <div *ngIf="firstPatientForm" style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+            
+                    <div class="div-signUpIn success-form swirl-anim">
+                        <button type="button" (click)="returnFirstForm()" class="img-backward"></button>
+                        Volver
+                    </div>
+                </div>
+        
+                <div *ngIf="firstPatientForm" style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+            
+                    <div class="div-signUpIn swirl-anim" [ngClass]="{'error-form': registerPatient.invalid || !captchaValid , 
+                        'success-form': registerPatient.valid && captchaValid}">
+                        <button type="submit" [disabled]="registerPatient.invalid || !captchaValid" class="img-signUp"></button>
+                        Registrarse
+                    </div>
+                </div>
+                            
+                    <div *ngIf="!firstPatientForm" style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+                        <div class="div-signUpIn swirl-anim" [ngClass]="{'error-form': justAge?.invalid || justIdentity?.invalid || justInsurance?.invalid || justName?.invalid || justSurname?.invalid , 
+                        'success-form': justAge?.valid && justIdentity?.valid && justInsurance?.valid && justName?.valid && justSurname?.valid}" >
+                            <button type="button" (click)="showSecondForm('a')" class="img-forward" [disabled]="justAge?.invalid || justIdentity?.invalid || justInsurance?.invalid || justName?.invalid || justSurname?.invalid"></button>
+                            Continuar
+                        </div>
+                    </div>
+                    
+            </div>
+        </form>
+
+    }
 
 
-    </div>
-    <br><br>
-    <button class="button-login button-hover">Ingresar</button>
+    @if(formForMedics){
+
+        <form [formGroup]="registerMedic" (ngSubmit)="onSubmitMedic()">
+
+            @if (!firstPatientForm) {
+    
+                <div class="form-pacient slide-anim" id="personal-data">
+                    <h2><i class="fa-solid fa-user-doctor"></i> Datos Personales</h2>
+                    <input [ngClass]="{'required': justMedicName?.hasError('required')}" class="input-text" type="text" formControlName="nameM" placeholder="Nombre">
+                    <ng-container *ngIf="justMedicName?.hasError('pattern')">
+                        <p>Solo letras para este campo.</p>
+                    </ng-container>
+                    <input [ngClass]="{'required': justMedicSurname?.hasError('required')}" class="input-text" type="text" formControlName="surnameM" placeholder="Apellido">
+                    <ng-container *ngIf="justMedicSurname?.hasError('pattern')">
+                        <p>Solo letras para este campo.</p>
+                    </ng-container>
+            
+                    <div style="justify-items: center; align-items: center; display: flex; gap: 1%; width: 100%; justify-content: center;">
+                    
+                        <input [ngClass]="{'required': justMedicAge?.hasError('required')}" class="input-text" style="width: 10%;" type="number" formControlName="ageM" placeholder="Edad">
+                        <input [ngClass]="{'required': justMedicIdentity?.hasError('required')}" class="input-text" style="width: 20%;" type="number" formControlName="identityM" placeholder="DNI">
+                        <!-- <input class="input-text" style="width: 28.5%;" type="" placeholder="Obra Social"> -->
+                        <div class="autocomplete-container">
+                            <div class="input-group">
+                              <input
+                                class="input-text"
+                                [ngClass]="{'required': justMedicSpecialty?.hasError('required')}"
+                                style="width: 100%;"
+                                type="text"
+                                [formControl]="specialtyControl"
+                                formControlName="specialtyM"
+                                placeholder="Ingrese la especialidad..."
+                              />
+                              <button class="button-add" (click)="addSpecialty()" type="button"> Agregar</button>
+                            </div>
+                          
+                            <ul *ngIf="suggestions.length > 0" class="sugerencias">
+                              <li
+                                *ngFor="let esp of suggestions"
+                                (click)="selectSpecialty(esp.descripcion)"
+                              >
+                                {{ esp.descripcion }}
+                              </li>
+                            </ul>
+                          
+                            <label *ngIf="loading">Buscando...</label>
+                          </div>
+                    </div>
+                    <ng-container *ngIf="justMedicAge?.hasError('max')">
+                        <p>Edad Máxima de 65 años.</p>
+                    </ng-container>
+                    <ng-container *ngIf="justMedicAge?.hasError('min')">
+                        <p>Edad Mínima de 24 años.</p>
+                    </ng-container>
+                    <ng-container *ngIf="justMedicIdentity?.hasError('max')">
+                        <p>El Máximo de Caracteres es 9.</p>
+                    </ng-container>
+                    <ng-container *ngIf="justMedicIdentity?.hasError('min')">
+                        <p>El Mínimo de Caracteres es 7.</p>
+                    </ng-container>
+                </div>
+            }
+    
+        
+            <div formGroupName="registerUserDataMedic">
+    
+                @if(firstPatientForm){
+            
+                    <div class="form-pacient" id="account-data">
+    
+                        <h2 class="slide-anim"><i class="fa-solid fa-user-doctor"></i> Información de la cuenta</h2>
+    
+                        <div class="slide-anim" style="justify-items: center; align-items: center; display: flex; gap: 20px; width: 100%; justify-content: center;">
+                            
+                            <input class="input-text" type="text" style="width: 30%;" formControlName="emailM" placeholder="Correo Electrónico">
+                    
+                            <div class="password-container">
+                                <input [type]="showPassword ? 'text' : 'password'" formControlName="passwordM" placeholder="Contraseña"/>
+                                <button type="button" class="toggle-btn" (click)="togglePassword()">
+                                      <i class="fa" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+                                </button>
+                            </div>
+                        </div>
+    
+                        <ng-container *ngIf="justMedicEmail?.hasError('email')">
+                            <p>No es formato Válido para Correo Electrónico.</p>
+                        </ng-container>
+                        <ng-container *ngIf="justMedicPassword?.value?.length < 6">
+                            <p>Como minimo 6 caracteres.</p>
+                        </ng-container>
+                    </div>
+                }
+            </div>
+    
+            @if(registerUserDataMedic.valid && firstPatientForm){
+    
+                <div formGroupName="imageMedic" class="form-pacient">
+    
+                    
+                        <h2 class="slide-anim">Foto del Especialista</h2>
+    
+                        <div class="previews">
+                            <div *ngIf="firstPatientForm" style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+            
+                                <div class="div-signUpIn" [ngClass]="{'jello-animation': imageMedic.invalid}" style="width: 130px; height: 130px; border-radius: 35px;">
+                                    <input type="file" class="img-camera file-input-clean" (change)="onImagesSelected($event, 2)"/>
+                                </div>
+                            </div>
+            
+                            <div class="previews">
+                                <img class="jello-animation" style="border-radius: 50%; border: 4px solid rgb(28, 122, 139);" (click)="closeOpenPreview(imagePreview1)" 
+                                *ngIf="imagePreview1" [src]="imagePreview1" width="100" height="100"/>
+                                <img class="jello-animation" style="border-radius: 50%; border: 4px solid rgb(28, 122, 139);" (click)="closeOpenPreview(imagePreview2)" 
+                                *ngIf="imagePreview2" [src]="imagePreview2" width="100" height="100"/>
+                            </div>
+    
+                        </div>
+
+                        @if (registerMedic.valid) {
+                            <re-captcha class="swirl-anim" style="position: fixed; top: 80%; left: 5%; z-index: 10000;"
+                                siteKey="6LcRS_orAAAAAMlyLf0tQWselUoNnsS7KGRkWClS"
+                                (resolved)="captchaValid = true">
+                            </re-captcha>
+                        }
+                </div>
+    
+                <div class="container-img-preview-large" id="img-pre-large">
+                    <img style="border: 2px solid #ECDBC9; border-radius: 24px; max-width: 95%;" [src]="imagePreview" alt="Foto 1"/>
+                </div>
+            }
+            <br>
+            <br><br>
+            <div class="div-buttons-short">
+        
+                <div *ngIf="firstPatientForm" style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+            
+                    <div class="div-signUpIn success-form swirl-anim">
+                        <button type="button" (click)="returnFirstForm()" class="img-backward"></button>
+                        Volver
+                    </div>
+                </div>
+        
+                <div *ngIf="firstPatientForm" style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+            
+                    <div class="div-signUpIn swirl-anim" [ngClass]="{'error-form': registerMedic.invalid || !captchaValid, 
+                        'success-form': registerMedic.valid && captchaValid}">
+                        <button type="submit" [disabled]="registerMedic.invalid || !captchaValid" class="img-signUp"></button>
+                        Registrarse
+                    </div>
+                </div>
+                            
+                    <div *ngIf="!firstPatientForm" style="display: flex; flex-direction: column; justify-content: center; justify-items: center; align-items: center;">
+                        <div class="div-signUpIn swirl-anim" [ngClass]="{'error-form': justMedicAge?.invalid || justMedicIdentity?.invalid || justMedicSpecialty?.invalid || 
+                        justMedicName?.invalid || justMedicSurname?.invalid , 
+                        'success-form': justMedicAge?.valid && justMedicIdentity?.valid && justMedicSpecialty?.valid && justMedicName?.valid && justMedicSurname?.valid}" >
+                            <button type="button" (click)="showSecondForm('a')" class="img-forward" 
+                            [disabled]="justMedicAge?.invalid || justMedicIdentity?.invalid || justMedicSpecialty?.invalid || justMedicName?.invalid || justMedicSurname?.invalid"></button>
+                            Continuar
+                        </div>
+                    </div>
+                    
+            </div>
+        </form>
+
+    }
+
+
 </div>
 
